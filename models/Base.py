@@ -22,16 +22,21 @@ class BaseModel:
         self.model = None
         self.BASE_DIR = "BASE_MODEL"
 
-    def fit(self, x_train, y_train):
-        self.model.fit(x_train, y_train)
+    def fit(self, x_train):
+        self.model.fit(x_train)
+        
+    def predict(self, x_test):
+        return self.model.predict(x_test)
 
-    def predict(self, x_train):
-        return self.model.predict(x_train)
+    def decision_function(self, x_test):
+        return self.model.decision_function(x_test)
 
     def optimize(self, data, n_trials=100, n_jobs=4,
                  direction="minimize", save_path=None):
         '''
         パラメータを最適化してモデルを上書きする
+        ただし異常データが判明している場合のみAUCで最適化する
+        正常データのみを学習する場合は利用できない？？
         '''
         obj_f = partial(self.objective, data)
         self.study = optuna.create_study(pruner=optuna.pruners.MedianPruner(
