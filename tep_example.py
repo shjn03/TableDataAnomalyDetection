@@ -18,8 +18,7 @@ df = pd.read_csv(data_path, index_col=0)
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Train  and Evalate boston')
-    parser.add_argument('--data', '-d', default=None, type=str,
+    parser = argparse.ArgumentParser(description='Anomlay detection at Tenesee Eastoman Process example',
                         help='trainning data to learn')
     parser.add_argument('--outputdir', '-o', type=str, default=None,
                         help='output directory name')
@@ -48,7 +47,7 @@ if __name__ == "__main__":
                     "PCA": models.PCAModel(base_dir=outputdir),
                     "OCSVM": models.OCSVMModel(base_dir=outputdir),
                     "LOF": models.LOFModel(base_dir=outputdir),
-                    "AE":models.AEModel(base_dir=outputdir)
+                    "AE": models.AEModel(base_dir=outputdir)
                     }
     trained_models = {}
     for modelname in train_models:
